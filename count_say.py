@@ -1,24 +1,26 @@
-def countandsay(n):
-    if n==1:
-        return "1"
-    if n==2:
-        return "11"
-
-    cnt = 1
-    s ="11"
-
-    for i in range(3, n+1):
-        s += '@'
-        l = len(s)
-        cnt = 1
-        temp =""
-        for j in range(1, l):
-            if s[j] != s[j-1]:
-                temp += str(cnt)
-                temp += s[j-1]
-            else:
-                cnt +=1
-        s = temp
-    return s
-
-print(countandsay(6))
+class Solution(object):
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        if n<=1:
+            return "1"
+        
+        a ="1"
+        
+        for _ in range(n-1):
+            c =0
+            b =""
+            temp = a[0]
+            
+            for j in a:
+                if j == temp:
+                    c +=1
+                else:
+                    b = b + str(c) + str(temp)
+                    temp = j
+                    c =1
+            b = b+str(c)+str(j)
+            a = b
+        return a
