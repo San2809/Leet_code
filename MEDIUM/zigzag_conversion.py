@@ -1,4 +1,3 @@
-from collections import defaultdict
 class Solution(object):
     def convert(self, s, numRows):
         """
@@ -6,22 +5,18 @@ class Solution(object):
         :type numRows: int
         :rtype: str
         """
-        if not s or numRows<=0:
+        if numRows <2:
             return s
-        res = [[] for _ in range(numRows)]
-        curr =0
-        isDown = True
-        
-        for i in range(len(s)):
-            res[curr].append(s[i])
+        ans = ["" for i in range(numRows)]
+        num =0
+        flag =True
+        for char in s:
+            ans[num] +=char
             
-            if curr >=numRows-1:
-                isDown =False
-            elif curr<=0:
-                isDown = True
+            if num == numRows-1:
+                flag =False
             
-            if isDown:
-                curr +=1
-            else:
-                curr -=1
-        return "".join(["".join(char) for char in res])
+            if not flag and num==0:
+                flag = True
+            num +=1 if flag else -1
+        return "".join(ans)
